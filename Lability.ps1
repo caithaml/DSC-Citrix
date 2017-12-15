@@ -109,10 +109,10 @@ Start-LabConfiguration -ConfigurationData $ConfigData -IgnorePendingReboot -Forc
 $vhdxpath = (get-vm DC).harddrives.Path|select -First 1|Split-Path
 
 #### vytvoreni disku
-foreach ($node in $ConfigData.AllNodes.NodeName)
-{
-New-VHD -Path $vhdxpath\$node_D.vhdx -Dynamic -SizeBytes 100GB
-Add-VMHardDiskDrive -vmname $node -Path $vhdxpath\$vhdxpath\$node_D.vhdx
+foreach ($node in $ConfigData.AllNodes.NodeName){
+
+#New-VHD -Path $($vhdxpath + '\' + "$node" + '_D.vhdx') -Dynamic -SizeBytes 100GB
+Add-VMHardDiskDrive -vmname $node -Path $($vhdxpath + '\' + "$node" + '_D.vhdx')
 }
 
 

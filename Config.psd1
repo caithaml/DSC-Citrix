@@ -23,7 +23,7 @@
                     DHCPRangeStart = '192.168.100.10'
                     DHCPRangeEnd   = '192.168.100.50'
                     DHCPSubnet     = '255.255.255.0'
-                    DHCPRouter     = '192.168.100.250'
+                    DHCPRouter     = '192.168.100.1'
                     DHCPDNS        = '192.168.100.100'
                 }
                
@@ -70,8 +70,8 @@
             WSH                         = $true
         },
         @{
-            NodeName                    = 'Citrix'
-            ComputerName                = 'Citrix'
+            NodeName                    = 'Citr'
+            ComputerName                = 'Citr'
             Role                        = 'Citrix'
             Description                 = 'Citrix'
             DomainJoin                  = $true

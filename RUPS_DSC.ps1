@@ -1197,18 +1197,18 @@ Node $AllNodes.Where{
             ASSysAdminAccounts   = 'Citrix\SG SQL Citrix'
             InstallSharedDir     = 'C:\Program Files\Microsoft SQL Server'
             InstallSharedWOWDir  = 'C:\Program Files (x86)\Microsoft SQL Server'
-            InstanceDir          = 'E:\Citrix'
-            InstallSQLDataDir    = 'E:\Citrix\Data'
-            SQLUserDBDir         = 'E:\Citrix\Data'
-            SQLUserDBLogDir      = 'E:\Citrix\Data'
-            SQLTempDBDir         = 'E:\Citrix\Data'
-            SQLTempDBLogDir      = 'E:\Citrix\Data'
-            SQLBackupDir         = 'E:\Citrix\Backup'
-            ASConfigDir          = 'E:\Citrix\AS\Config'
-            ASDataDir            = 'E:\Citrix\AS\Data'
-            ASLogDir             = 'E:\Citrix\AS\Log'
-            ASBackupDir          = 'E:\Citrix\AS\Backup'
-            ASTempDir            = 'E:\Citrix\AS\Temp'
+            InstanceDir          = 'D:\Citrix'
+            InstallSQLDataDir    = 'D:\Citrix\Data'
+            SQLUserDBDir         = 'D:\Citrix\Data'
+            SQLUserDBLogDir      = 'D:\Citrix\Data'
+            SQLTempDBDir         = 'D:\Citrix\Data'
+            SQLTempDBLogDir      = 'D:\Citrix\Data'
+            SQLBackupDir         = 'D:\Citrix\Backup'
+            ASConfigDir          = 'D:\Citrix\AS\Config'
+            ASDataDir            = 'D:\Citrix\AS\Data'
+            ASLogDir             = 'D:\Citrix\AS\Log'
+            ASBackupDir          = 'D:\Citrix\AS\Backup'
+            ASTempDir            = 'D:\Citrix\AS\Temp'
             SourcePath           = '\\Citrix.local\dfs\NetApps\SQL2016'
             UpdateEnabled        = 'False'
             ForceReboot          = $true
@@ -1225,7 +1225,45 @@ Node $AllNodes.Where{
             SourceCredential = $domaincred
         }
 
+        xSQLServerSetup 'InstallVMMInstance'
+        {
+            InstanceName         = 'VMM'
+            Features             = 'SQLENGINE,AS'
+            SQLCollation         = 'SQL_Latin1_General_CP1_CI_AS'
+            SQLSvcAccount        = $SqlCitrixCredential
+            AgtSvcAccount        = $SqlCitrixCredential
+            ASSvcAccount         = $SqlCitrixCredential
+            SQLSysAdminAccounts  = 'Citrix\SG SQL Citrix'
+            ASSysAdminAccounts   = 'Citrix\SG SQL Citrix'
+            InstallSharedDir     = 'C:\Program Files\Microsoft SQL Server'
+            InstallSharedWOWDir  = 'C:\Program Files (x86)\Microsoft SQL Server'
+            InstanceDir          = 'D:\VMM'
+            InstallSQLDataDir    = 'D:\VMM\Data'
+            SQLUserDBDir         = 'D:\VMM\Data'
+            SQLUserDBLogDir      = 'D:\VMM\Data'
+            SQLTempDBDir         = 'D:\VMM\Data'
+            SQLTempDBLogDir      = 'D:\VMM\Data'
+            SQLBackupDir         = 'D:\VMM\Backup'
+            ASConfigDir          = 'D:\VMM\AS\Config'
+            ASDataDir            = 'D:\VMM\AS\Data'
+            ASLogDir             = 'D:\VMM\AS\Log'
+            ASBackupDir          = 'D:\VMM\AS\Backup'
+            ASTempDir            = 'D:\VMM\AS\Temp'
+            SourcePath           = '\\Citrix.local\dfs\NetApps\SQL2016'
+            UpdateEnabled        = 'False'
+            ForceReboot          = $true
+            PsDscRunAsCredential = $domaincred
+            DependsOn = '[xComputer]DomainJoin'
+        }
 
+         xSQLServerFirewall FWDVMM
+        {
+            Ensure           = 'Present'
+            Features         = 'SQLENGINE'
+            InstanceName     = 'VMM'
+            SourcePath       = '\\Citrix.local\dfs\NetApps\SQL2016'
+            SourceCredential = $domaincred
+        }
     ##>SQL
   }
 
