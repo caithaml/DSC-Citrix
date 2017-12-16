@@ -55,7 +55,7 @@ $ConfigData = @{
 "@
         },
         @{
-            NodeName = 'Citrix';
+            NodeName = 'Citr';
             Lability_ProcessorCount = 2;
             Lability_SwitchName = 'citrix';
            Lability_StartupMemory  = 4GB;
