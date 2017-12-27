@@ -111,10 +111,12 @@ $vhdxpath = (get-vm DC).harddrives.Path|select -First 1|Split-Path
 #### vytvoreni disku
 foreach ($node in $ConfigData.AllNodes.NodeName){
 
-#New-VHD -Path $($vhdxpath + '\' + "$node" + '_D.vhdx') -Dynamic -SizeBytes 100GB
+New-VHD -Path $($vhdxpath + '\' + "$node" + '_D.vhdx') -Dynamic -SizeBytes 100GB
 Add-VMHardDiskDrive -vmname $node -Path $($vhdxpath + '\' + "$node" + '_D.vhdx')
 }
 
+#povoleni nested virtualizace
+ Set-VMProcessor -VMName hyperv -ExposeVirtualizationExtensions $true
 
 #$ConfigData.AllNodes.nodename | foreach {Set-VMMemory $_ -DynamicMemoryEnabled $true -MinimumBytes 2GB -MaximumBytes 4GB}
 

@@ -931,68 +931,6 @@ Node $AllNodes.Where{$_.Role -eq "DC"}.Nodename
             DependsOn   = '[File]Utils'
         }
 
-        cNtfsPermissionsInheritance Utils {
-            Path              = 'D:\Utils'
-            Enabled           = $false
-            PreserveInherited = $false
-            DependsOn         = '[File]Utils'
-        }
-
-        cNtfsPermissionEntry Utils {
-            Ensure                   = 'Present'
-            Path                     = 'D:\Utils'
-            Principal                = 'NT AUTHORITY\Authenticated Users'
-            #ItemType                 = 'Directory'
-            AccessControlInformation = @(
-                cNtfsAccessControlInformation {
-                    AccessControlType  = 'Allow'
-                    FileSystemRights   = 'ReadAndExecute'
-                    Inheritance        = 'ThisFolderSubfoldersAndFiles'
-                    NoPropagateInherit = $false
-                }
-                cNtfsAccessControlInformation {
-                    AccessControlType  = 'Allow'
-                    FileSystemRights   = 'ListDirectory'
-                    Inheritance        = 'ThisFolderSubfoldersAndFiles'
-                    NoPropagateInherit = $false
-                }
-            )
-            DependsOn                = '[File]Utils'
-        }
-
-        cNtfsPermissionEntry Utils_DomainAdmins {
-            Ensure                   = 'Present'
-            Path                     = 'D:\Utils'
-            Principal                = 'Domain Admins'
-            #ItemType                 = 'Directory'
-            AccessControlInformation = @(
-                cNtfsAccessControlInformation {
-                    AccessControlType  = 'Allow'
-                    FileSystemRights   = 'FullControl'
-                    Inheritance        = 'ThisFolderSubfoldersAndFiles'
-                    NoPropagateInherit = $false
-                }
-
-            )
-            DependsOn                = '[File]Utils'
-        }
-
-        cNtfsPermissionEntry Utils_WSAdmins {
-            Ensure                   = 'Present'
-            Path                     = 'D:\Utils'
-            Principal                = 'SG Admins'
-            #ItemType                 = 'Directory'
-            AccessControlInformation = @(
-                cNtfsAccessControlInformation {
-                    AccessControlType  = 'Allow'
-                    FileSystemRights   = 'FullControl'
-                    Inheritance        = 'ThisFolderSubfoldersAndFiles'
-                    NoPropagateInherit = $false
-                }
-            )
-            DependsOn                = '[File]Utils'
-        }
-
         File Audits {
             Type            = 'Directory'
             Ensure          = 'Present'
@@ -1030,62 +968,7 @@ Node $AllNodes.Where{$_.Role -eq "DC"}.Nodename
             DependsOn   = '[File]Audits'
         }
 
-        cNtfsPermissionsInheritance Audits {
-            Path              = 'D:\Audits'
-            Enabled           = $false
-            PreserveInherited = $false
-            DependsOn         = '[File]Audits'
-        }
-
-        cNtfsPermissionEntry Audits {
-            Ensure                   = 'Present'
-            Path                     = 'D:\Audits'
-            Principal                = 'NT AUTHORITY\Authenticated Users'
-            #ItemType                 = 'Directory'
-            AccessControlInformation = @(
-                cNtfsAccessControlInformation {
-                    AccessControlType  = 'Allow'
-                    FileSystemRights   = 'Write'
-                    Inheritance        = 'ThisFolderSubfoldersAndFiles'
-                    NoPropagateInherit = $false
-                }
-            )
-            DependsOn                = '[File]Audits'
-        }
-
-        cNtfsPermissionEntry Audits_DomainAdmins {
-            Ensure                   = 'Present'
-            Path                     = 'D:\Audits'
-            Principal                = 'Domain Admins'
-            #ItemType                 = 'Directory'
-            AccessControlInformation = @(
-                cNtfsAccessControlInformation {
-                    AccessControlType  = 'Allow'
-                    FileSystemRights   = 'FullControl'
-                    Inheritance        = 'ThisFolderSubfoldersAndFiles'
-                    NoPropagateInherit = $false
-                }
-
-            )
-            DependsOn                = '[File]Audits'
-        }
-
-        cNtfsPermissionEntry Audits_WSAdmins {
-            Ensure                   = 'Present'
-            Path                     = 'D:\Audits'
-            Principal                = 'SG Admins'
-            #ItemType                 = 'Directory'
-            AccessControlInformation = @(
-                cNtfsAccessControlInformation {
-                    AccessControlType  = 'Allow'
-                    FileSystemRights   = 'FullControl'
-                    Inheritance        = 'ThisFolderSubfoldersAndFiles'
-                    NoPropagateInherit = $false
-                }
-            )
-            DependsOn                = '[File]Audits'
-        }
-
+    
         ##<Adresare
     }
 

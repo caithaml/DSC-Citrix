@@ -60,7 +60,7 @@
             DomainJoin                  = $true
             DomainName                  = 'Citrix.local'
             DomainOUName                = 'OU=Servers,OU=101,dc=Citrix,dc=local'
-            Features                    = 'GPMC', 'RSAT-AD-Tools','hyper-v'
+            Features     = 'GPMC', 'RSAT-AD-Tools', 'hyper-v', 'Hyper-V-Tools', 'Hyper-V-PowerShell'
             FeaturesRemove              = 'PowerShell-V2', 'FS-SMB1', 'Telnet-Client'
             IPv4                        = '192.168.100.132/24'
             DNS                         = '192.168.100.100', '192.168.100.101'
